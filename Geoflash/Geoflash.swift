@@ -17,11 +17,12 @@ struct Geoflash {
         var lat             = Geoflash.lat
         var lng             = Geoflash.lng
 
-        var hash            = Array<Character>()
+        var hash            = Array<Character>(repeating: "a", count: precision)
 
         var isEven          = true
         var char            = 0
         var count           = 0
+        var pos             = 0
 
         func compare(range: GeoRange, source: Double) -> GeoRange {
             
@@ -57,13 +58,14 @@ struct Geoflash {
             
             if count == 5 {
                 
-                hash.append(BASE32[char])
-                count   = 0
-                char    = 0
+                hash[pos]   = BASE32[char]
+                pos         += 1
+                count       = 0
+                char        = 0
                 
             }
 
-        } while hash.count < precision
+        } while pos < precision
 
         return String(hash)
         

@@ -21,7 +21,7 @@ let results: [(name: String, passed: Bool)] = [
                                  longitude  : test.longitude,
                                  precision  : test.hash.count)
         
-        return (name: test.name, passed: hash == test.hash)
+    return (name: test.name, passed: hash == test.hash && !hash.contains("a"))
         
 }
 
