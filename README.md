@@ -29,6 +29,8 @@ This repo includes an Xcode project as well as the `Geoflash.swift` file itself.
 
 ## Usage
 
+### Encoding as Geohash
+
 To hash a location simply pass the latitude and longitude as `Double` to the `hash` static function.
 
 ```swift
@@ -41,5 +43,35 @@ Optionally a precision argument can be passed to limit the length of the hash an
 ```swift
 let hash = Geoflash.hash(latitude: 38.897, longitude: -77.036, precision: 5)
 // dqcjr
+```
+
+### Decoding a Geohash
+
+Geoflash supports decoding a Geohash as either a range of longitude and latitude values or as an array of GeoJSON points.
+
+To decode a hash pass in the hash and if the hash is valid an array `[Double]` will be returned. Note each `[Double]` array is formatted as per GeoJSON and so would be: (Longitude, Latitude).
+
+```swift
+let coords = [-77.036, 38.897]
+// Latitude: 38.897
+// Longitude: -77.036
+```
+
+A concrete example:
+
+**Forced unwrapping is used in these examples for brevity, it is not recommended for normal use.**
+
+```swift
+let hash = "63tn3q5d84bp" // Talca, South America
+let points = Geoflash.decode(geojson: hash)!
+// [[-71.65901184082031, -35.43046312406659]]
+```
+
+The `maxPointDistance` parameter can optionally be passed in to control what level of accuracy is required from the output (or the range of values in other words). The default value is a value of `0.000001` which has the effect of returning a single point for hashes of 12 digits and a polygon drawing the range of values for all lower lengths of hash.
+
+```swift
+let hash = "63tn3q"
+let points = Geoflash.decode(geojson: hash)!
+// [[-71.663818359375, -35.430908203125], [-71.65283203125, -35.430908203125], [-71.65283203125, -35.4254150390625], [-71.663818359375, -35.4254150390625]]
 ```
 
