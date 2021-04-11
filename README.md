@@ -12,13 +12,12 @@ Geoflash is performance tested against other Swift implementations of the `geoha
 
 ### Things Geoflash is
 
-+ A single file solution with the only dependency of `Foundation`, favouring performance
++ A single file solution with the only dependency of `Foundation`, favoring performance
 + A base implementation using `Double` primitives for arguments to be easily integrated into other types as extensions
 
 ### Things Geoflash is not
 
 + A general purpose geodesy framework
-+ A geohash encode (currently, though this may change in future releases)
 
 ## Installation
 
@@ -30,14 +29,14 @@ This repo includes an Xcode project as well as the `Geoflash.swift` file itself.
 
 ## Usage
 
-To hash a location simply pass the latiude and longitude as `Double` to the `hash` static function.
+To hash a location simply pass the latitude and longitude as `Double` to the `hash` static function.
 
 ```swift
 let hash = Geoflash.hash(latitude: 38.897, longitude: -77.036)
 // dqcjr0bp7n74
 ```
 
-Optionally a precsion argument can be passed to limit the length of the hash and correspondingly limit the precision should the hash be decoded. The default for precision is `12`.
+Optionally a precision argument can be passed to limit the length of the hash and correspondingly limit the precision should the hash be decoded. The default for precision is `12`.
 
 ```swift
 let hash = Geoflash.hash(latitude: 38.897, longitude: -77.036, precision: 5)

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D48512F52432013B0071EE69 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48512F42432013B0071EE69 /* main.swift */; };
 		D48512FC243202FD0071EE69 /* Geoflash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48512FB243202FD0071EE69 /* Geoflash.swift */; };
+		D4CABDC92622FB0A002D6C0F /* GeoflashDecodeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CABDC82622FB0A002D6C0F /* GeoflashDecodeExtension.swift */; };
+		D4CABDE726230946002D6C0F /* StringLeftPadExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CABDE626230946002D6C0F /* StringLeftPadExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,8 @@
 		D48512F12432013B0071EE69 /* Geoflash */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Geoflash; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48512F42432013B0071EE69 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		D48512FB243202FD0071EE69 /* Geoflash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geoflash.swift; sourceTree = "<group>"; };
+		D4CABDC82622FB0A002D6C0F /* GeoflashDecodeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoflashDecodeExtension.swift; sourceTree = "<group>"; };
+		D4CABDE626230946002D6C0F /* StringLeftPadExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLeftPadExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				D48512FB243202FD0071EE69 /* Geoflash.swift */,
+				D4CABDC82622FB0A002D6C0F /* GeoflashDecodeExtension.swift */,
 				D48512F42432013B0071EE69 /* main.swift */,
+				D4CABDE626230946002D6C0F /* StringLeftPadExtension.swift */,
 			);
 			path = Geoflash;
 			sourceTree = "<group>";
@@ -92,7 +98,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Robert Atherton";
 				TargetAttributes = {
 					D48512F02432013B0071EE69 = {
@@ -124,7 +130,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D48512FC243202FD0071EE69 /* Geoflash.swift in Sources */,
+				D4CABDC92622FB0A002D6C0F /* GeoflashDecodeExtension.swift in Sources */,
 				D48512F52432013B0071EE69 /* main.swift in Sources */,
+				D4CABDE726230946002D6C0F /* StringLeftPadExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,6 +165,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -217,6 +226,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -247,6 +257,7 @@
 		D48512F92432013B0071EE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LR9W9X55VW;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -258,6 +269,7 @@
 		D48512FA2432013B0071EE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LR9W9X55VW;
 				ENABLE_HARDENED_RUNTIME = YES;
