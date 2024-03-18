@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "F58F161E-D638-443E-B1E8-D3106A7B5B63",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:",
+          "identifier" : "Geoflash",
+          "name" : "Geoflash"
+        }
+      ]
+    },
+    "testExecutionOrdering" : "random"
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "GeoflashTests",
+        "name" : "GeoflashTests"
+      }
+    }
+  ],
+  "version" : 1
+}
