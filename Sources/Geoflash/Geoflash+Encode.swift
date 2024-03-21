@@ -6,6 +6,15 @@ extension Geoflash {
     static let lng = Geoflash.Range(min: -180.0, max: 180.0)!
     static let validPrecisions = 1...12
     
+    /// Encode latitude/longitude as [Geohash](https://en.wikipedia.org/wiki/Geohash)
+    ///
+    /// - Parameter latitude: The latitude to be encoded (-90...90 valid values).
+    /// - Parameter longitude: The longitude to be encoded (-180...180 valid values).
+    /// - Parameter precision: The count of characters to be included in the result (1...12 valid).
+    ///
+    /// - Returns: The Geohash encoded string.
+    ///
+    /// - Throws: On invalid arguments.
     public static func encode(
         latitude: Double,
         longitude: Double,

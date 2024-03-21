@@ -54,6 +54,19 @@ extension Geoflash {
         
     }
     
+    /// Decodes a [Geohash](https://en.wikipedia.org/wiki/Geohash) encoded string
+    ///
+    /// To be a valid Geohash the `String` passed must contain any digits 0-9 and any lower case
+    /// digit in the set `bcdefghjkmnpqrstuvwxyz`. This is the English language alphabet, excluding
+    /// the letters `a`, `i`, `l` and `o`
+    ///
+    /// - Parameter geohash: The `String` value to attempt to decode.
+    /// - Parameter maxPointDistance: A `Double` value representing the number of decimal places.
+    ///
+    /// - Returns: An array of [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946)
+    /// encoded coordinates.
+    ///
+    /// - Throws: When passed an invalid geohash.
     public static func decode(
         geohash: String,
         maxPointDistance: Double = 0.000001
