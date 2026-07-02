@@ -8,7 +8,7 @@ import Foundation
 /// applications of what is known as a Z-order curve, and generally space-filling curves.
 ///
 /// Geohashes offer properties like arbitrary precision and the possibility of gradually removing
-/// characters from the end of the code to reduce its size (and gradually lose precision). 
+/// characters from the end of the code to reduce its size (and gradually lose precision).
 /// Geohashing guarantees that the longer a shared prefix between two geohashes is, the spatially
 /// closer they are together. The reverse of this is not guaranteed, as two points can be very
 /// close but have a short or no shared prefix.

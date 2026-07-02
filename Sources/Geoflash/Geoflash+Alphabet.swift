@@ -20,5 +20,4 @@ extension Geoflash {
     static let alphabetMap = alphabet
         .enumerated()
         .reduce(into: [Character: Int]()) { $0[$1.element] = $1.offset }
-
 }

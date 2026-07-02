@@ -1,7 +1,7 @@
 import Foundation
 
 extension Geoflash {
-    
+
     /// Errors that can be thrown during encoding/decoding a geohash.
     public enum CodingError: Error {
 
@@ -11,5 +11,4 @@ extension Geoflash {
         /// The arguments passed to encode a latitude/longitude are not valid.
         case invalidEncodeArguments
     }
-    
 }

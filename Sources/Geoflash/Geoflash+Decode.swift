@@ -13,29 +13,25 @@ extension Geoflash {
         range: Geoflash.Range,
         bit: Bool
     ) -> Geoflash.Range {
-
         let mean = (range.min + range.max) / 2
 
         return bit
-        ? (Geoflash.Range(min: mean, max: range.max) ?? range)
-        : (Geoflash.Range(min: range.min, max: mean) ?? range)
-
+            ? (Geoflash.Range(min: mean, max: range.max) ?? range)
+            : (Geoflash.Range(min: range.min, max: mean) ?? range)
     }
 
     static func decode(
         rangeOf hash: String
     ) throws -> (latitude: Geoflash.Range, longitude: Geoflash.Range) {
-
         guard validPrecisions.contains(hash.count) else {
             throw CodingError.invalidGeohash
         }
 
         var latRange = lat
-        var lonRange = lng
+        var lonRange = lon
         var isEven = true
 
         for char in hash {
-
             guard let value = alphabetMap[char] else {
                 throw CodingError.invalidGeohash
             }
@@ -43,7 +39,6 @@ extension Geoflash {
             // Read the padSize bits of each character most significant bit first,
             // alternating between the longitude and latitude ranges.
             for shift in stride(from: padSize - 1, through: 0, by: -1) {
-
                 let bit = (value >> shift) & 1 == 1
 
                 if isEven {
@@ -53,13 +48,10 @@ extension Geoflash {
                 }
 
                 isEven.toggle()
-
             }
-
         }
 
         return (latitude: latRange, longitude: lonRange)
-
     }
 
     /// Decodes a [Geohash](https://en.wikipedia.org/wiki/Geohash) encoded string.
@@ -87,19 +79,18 @@ extension Geoflash {
         geohash: String,
         maxPointDistance: Double = 0.000001
     ) throws -> [[Double]] {
-
         let range = try decode(rangeOf: geohash)
 
-        let pointDistance = max(abs(range.latitude.max - range.latitude.min),
-                                abs(range.longitude.max - range.longitude.min))
+        let pointDistance = max(
+            abs(range.latitude.max - range.latitude.min),
+            abs(range.longitude.max - range.longitude.min)
+        )
 
         return pointDistance <= maxPointDistance
-        ? [[range.longitude.min, range.latitude.min]]
-        : [[range.longitude.min, range.latitude.min],
-           [range.longitude.max, range.latitude.min],
-           [range.longitude.max, range.latitude.max],
-           [range.longitude.min, range.latitude.max]]
-
+            ? [[range.longitude.min, range.latitude.min]]
+            : [[range.longitude.min, range.latitude.min],
+               [range.longitude.max, range.latitude.min],
+               [range.longitude.max, range.latitude.max],
+               [range.longitude.min, range.latitude.max]]
     }
-
 }
