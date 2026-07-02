@@ -73,6 +73,18 @@ final class GeoflashDecodeTests: XCTestCase {
         
     }
     
+    func testPerformance() throws {
+
+        let hash = "u4pruydqqvjk"
+
+        measure {
+
+            let _ = try! Geoflash.decode(geohash: hash)
+
+        }
+
+    }
+
     func testKnownValueDecodesWithPrecision() throws {
         
         let lat = 57.64911063015461

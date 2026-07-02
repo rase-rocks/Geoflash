@@ -3,17 +3,22 @@ import XCTest
 
 final class GeoflashAlphabetTests: XCTestCase {
 
-    func testAllCharsHaveStringRepresentation() {
-        
-        for char in Geoflash.alphabet {
-            
+    func testAllCharsMapToTheirIndex() {
+
+        for (index, char) in Geoflash.alphabet.enumerated() {
+
             let result = Geoflash.alphabetMap[char]
-            
-            XCTAssertNotNil(result)
-            XCTAssertEqual(result?.count, Geoflash.padSize)
-            
+
+            XCTAssertEqual(result, index)
+
         }
-        
+
+    }
+
+    func testAlphabetCoversTheFiveBitRange() {
+
+        XCTAssertEqual(Geoflash.alphabet.count, 1 << Geoflash.padSize)
+
     }
 
 }
