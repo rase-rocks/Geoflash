@@ -25,7 +25,7 @@ extension Geoflash {
         let pad = (padSize - s.count % padSize) % padSize
         
         return Array(repeating: "0", count: pad)
-            .joined(separator: "") + s
+            .joined() + s
         
     }
     

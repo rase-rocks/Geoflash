@@ -6,10 +6,10 @@ extension Geoflash {
     public struct Range {
         
         /// The minimum possible value
-        let min: Double
-        
+        public let min: Double
+
         /// The maximum possible value
-        let max: Double
+        public let max: Double
         
         /// Initialise a ``Geoflash/Range`` with min/max values
         ///
@@ -43,7 +43,7 @@ extension Geoflash {
         /// - Parameter value: The value to be checked.
         ///
         /// - Returns: A truthy value if the `value` passed is contained with the instance.
-        func contains(value: Double) -> Bool {
+        public func contains(value: Double) -> Bool {
             
             return (min...max)
                 .contains(value)

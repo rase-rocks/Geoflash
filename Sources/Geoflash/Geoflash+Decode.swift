@@ -21,11 +21,12 @@ extension Geoflash {
             .compactMap { alphabetMap[$0] }
             .joined()
         
+        // A valid hash has a length within the supported precision range and every
+        // character maps to a padSize length bit string. The second condition also
+        // rejects any unmapped characters, since they are dropped by compactMap.
         guard
-            !bits.isEmpty,
             validPrecisions.contains(hash.count),
-            bits.count == hash.count * padSize,
-            bits.count.isMultiple(of: padSize)
+            bits.count == hash.count * padSize
         else { throw CodingError.invalidGeohash }
         
         return bits
