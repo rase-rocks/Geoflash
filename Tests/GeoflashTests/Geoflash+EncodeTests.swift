@@ -7,6 +7,7 @@ final class GeoflashEncodeTests: XCTestCase {
     let talcaLongitude = -71.65901184082031
 
     func testOutOfRangeEncoding() {
+
         let smallestValue = Double.leastNormalMagnitude
 
         let rnd: (Double, Double) -> Double = { [
@@ -21,9 +22,11 @@ final class GeoflashEncodeTests: XCTestCase {
             XCTAssertThrowsError(try Geoflash.encode(latitude: invalidLatitude,
                                                      longitude: invalidLongitude))
         }
+
     }
 
     func testOutOfRangePrecision() {
+
         let invalidPrecision = { [
             Int.random(in: Int.min...0),
             Int.random(in: 13...Int.max)
@@ -36,9 +39,11 @@ final class GeoflashEncodeTests: XCTestCase {
                                                      longitude: talcaLongitude,
                                                      precision: precision))
         }
+
     }
 
     func testKnownExample() throws {
+
         let lat = 57.64911063015461
         let lon = 10.40743969380855
 
@@ -49,14 +54,17 @@ final class GeoflashEncodeTests: XCTestCase {
                                          precision: 11)
 
         XCTAssertEqual(result, expected)
+
     }
 
     func testKnownExamplePrecision() throws {
+
         try [
             (precision: 12, expectedPoints: 1),
             (precision: 11, expectedPoints: 4),
             (precision: 6, expectedPoints: 4)
         ].forEach { test in
+
             let talca = try Geoflash.encode(latitude: talcaLatitude,
                                             longitude: talcaLongitude,
                                             precision: test.precision)
@@ -65,14 +73,19 @@ final class GeoflashEncodeTests: XCTestCase {
 
             XCTAssertEqual(points.count,
                            test.expectedPoints, "Precision \(test.precision)")
+
         }
+
     }
 
     func testPerformance() throws {
+
         measure {
             let _ = try! Geoflash.encode(latitude: talcaLatitude,
                                          longitude: talcaLongitude,
                                          precision: 12)
         }
+
     }
+
 }

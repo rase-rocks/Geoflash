@@ -7,22 +7,26 @@ extension Geoflash {
     /// - Parameters:
     ///   - range: The range to subdivide.
     ///   - bit: When `true` the upper half is selected, otherwise the lower half.
+    ///
     /// - Returns: The selected half, or the unchanged `range` if it can no longer be
     ///   subdivided within `Double` precision.
     static func decodeReducer(
         range: Geoflash.Range,
         bit: Bool
     ) -> Geoflash.Range {
+
         let mean = (range.min + range.max) / 2
 
         return bit
             ? (Geoflash.Range(min: mean, max: range.max) ?? range)
             : (Geoflash.Range(min: range.min, max: mean) ?? range)
+
     }
 
     static func decode(
         rangeOf hash: String
     ) throws -> (latitude: Geoflash.Range, longitude: Geoflash.Range) {
+
         guard validPrecisions.contains(hash.count) else {
             throw CodingError.invalidGeohash
         }
@@ -52,6 +56,7 @@ extension Geoflash {
         }
 
         return (latitude: latRange, longitude: lonRange)
+
     }
 
     /// Decodes a [Geohash](https://en.wikipedia.org/wiki/Geohash) encoded string.
@@ -71,14 +76,17 @@ extension Geoflash {
     ///   - maxPointDistance: The largest span, in degrees, that a decoded range may cover
     ///     before a bounding polygon is returned instead of a single point. Defaults to
     ///     `0.000001`, which yields a single point for 12 character hashes and a polygon otherwise.
+    ///
     /// - Returns: An array of [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946)
     ///   encoded `[longitude, latitude]` coordinates. A single point when the decoded range is
     ///   within `maxPointDistance`, otherwise the four corners of the bounding polygon.
+    ///
     /// - Throws: ``Geoflash/CodingError/invalidGeohash`` when passed an invalid geohash.
     public static func decode(
         geohash: String,
         maxPointDistance: Double = 0.000001
     ) throws -> [[Double]] {
+
         let range = try decode(rangeOf: geohash)
 
         let pointDistance = max(
@@ -92,5 +100,7 @@ extension Geoflash {
                [range.longitude.max, range.latitude.min],
                [range.longitude.max, range.latitude.max],
                [range.longitude.min, range.latitude.max]]
+
     }
+
 }

@@ -20,7 +20,9 @@ extension Geoflash {
     ///   - latitude: The latitude to be encoded (-90...90 valid values).
     ///   - longitude: The longitude to be encoded (-180...180 valid values).
     ///   - precision: The count of characters to be included in the result (1...12 valid).
+    ///
     /// - Returns: The Geohash encoded string.
+    ///
     /// - Throws: ``Geoflash/CodingError/invalidEncodeArguments`` when the latitude, longitude
     ///   or precision falls outside its valid range.
     public static func encode(
@@ -28,6 +30,7 @@ extension Geoflash {
         longitude: Double,
         precision: Int = 12
     ) throws -> String {
+
         var lat = Geoflash.lat
         var lon = Geoflash.lon
 
@@ -49,6 +52,7 @@ extension Geoflash {
             range: Geoflash.Range,
             source: Double
         ) -> Geoflash.Range {
+
             let mean = (range.min + range.max) / 2
             let isLow = source < mean
 
@@ -62,6 +66,7 @@ extension Geoflash {
             }
 
             return Range(unchecked: min, max: max)
+
         }
 
         repeat {
@@ -83,5 +88,7 @@ extension Geoflash {
         } while pos < precision
 
         return String(hash)
+
     }
+
 }

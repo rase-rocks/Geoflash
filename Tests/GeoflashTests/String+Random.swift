@@ -5,6 +5,7 @@ extension CharacterSet {
     /// Documentation at
     /// https://developer.apple.com/documentation/foundation/nscharacterset/1417719-bitmaprepresentation
     var codePoints: [Int] {
+
         var result: [Int] = []
         var plane = 0
 
@@ -25,11 +26,13 @@ extension CharacterSet {
         }
 
         return result
+
     }
 
     var unicodeScalars: [UnicodeScalar] {
         codePoints.compactMap { UnicodeScalar($0) }
     }
+
 }
 
 extension String {
@@ -41,15 +44,19 @@ extension String {
         CharacterSet.decimalDigits,
         CharacterSet.whitespacesAndNewlines
     ].reduce(CharacterSet()) { $0.union($1) }.unicodeScalars.map { Character($0) }
+
 }
 
 extension String {
 
     public static func random(in range: Range<Int>) -> String {
+
         guard let max = range.randomElement() else { return "" }
 
         let chars = (0..<max).compactMap { _ in allCharacters.randomElement() }
 
         return String(chars)
+
     }
+
 }

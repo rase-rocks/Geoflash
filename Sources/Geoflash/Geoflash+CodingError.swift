@@ -10,5 +10,7 @@ extension Geoflash {
 
         /// The arguments passed to encode a latitude/longitude are not valid.
         case invalidEncodeArguments
+
     }
+
 }
