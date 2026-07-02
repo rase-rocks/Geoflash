@@ -28,6 +28,37 @@ final class GeoflashRangeTests: XCTestCase {
         
     }
     
+    func testUncheckedInitPreservesBounds() {
+
+        let range = Geoflash.Range(unchecked: -12.5, max: 34.75)
+
+        XCTAssertEqual(range.min, -12.5)
+        XCTAssertEqual(range.max, 34.75)
+
+    }
+
+    func testSubdivisionFallsBackWhenRangeCannotSplit() {
+
+        // Two adjacent Double values cannot be subdivided: their mean rounds to one of
+        // the bounds, so one half is degenerate and Range(min:max:) returns nil. The
+        // subdivision helper must return the unchanged range rather than trapping, which
+        // is the regression guard for the removed force unwrap.
+        let min = 1.0
+        let max = min.nextUp
+        let range = Geoflash.Range(unchecked: min, max: max)
+        let mean = (min + max) / 2
+
+        XCTAssertTrue(mean == min || mean == max,
+                      "Adjacent Doubles should round the mean onto a bound")
+
+        let collapsingBit = mean == min ? false : true
+        let result = Geoflash.decodeReducer(range: range, bit: collapsingBit)
+
+        XCTAssertEqual(result.min, min)
+        XCTAssertEqual(result.max, max)
+
+    }
+
     func testConstantsValid() {
         
         let lat = Geoflash.lat
