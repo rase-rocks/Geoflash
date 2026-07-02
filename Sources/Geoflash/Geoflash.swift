@@ -19,7 +19,7 @@ import Foundation
 /// physical locations). Points close to the North and South poles will have very different
 /// geohashes (different longitudes for near physical locations).
 ///
-/// The above explaination is taken directly from
+/// The above explanation is taken directly from
 /// [Wikipedia](https://en.wikipedia.org/wiki/Geohash)
 ///
 /// The ``Geoflash`` type exists to namespace encoding and decoding functionality

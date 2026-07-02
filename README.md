@@ -8,7 +8,7 @@
 
 ## About Geoflash
 
-Geoflash is performance tested against other Swift implementations of the `geohash` algorithm. It is intended to perform well when compared to others and be a single file solution.
+Geoflash is a performance oriented Swift implementation of the `geohash` algorithm. It is designed to perform well while remaining a small, focused base implementation.
 
 ### Things Geoflash is
 
@@ -17,6 +17,15 @@ Geoflash is performance tested against other Swift implementations of the `geoha
 ### Things Geoflash is not
 
 + A general purpose geodesy framework
+
+## Documentation
+
+API reference documentation is provided as a DocC catalog. Build it with the
+[Swift DocC Plugin](https://github.com/apple/swift-docc-plugin):
+
+```sh
+swift package generate-documentation --target Geoflash
+```
 
 ## Installation
 
