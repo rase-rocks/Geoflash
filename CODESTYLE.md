@@ -10,6 +10,7 @@ Table of Contents
     *   [File Names](#file-names)
     *   [File Encoding](#file-encoding)
     *   [Whitespace Characters](#whitespace-characters)
+    *   [Indentation](#indentation)
     *   [Special Escape Sequences](#special-escape-sequences)
     *   [Invisible Characters and Modifiers](#invisible-characters-and-modifiers)
     *   [String Literals](#string-literals)
@@ -106,6 +107,10 @@ Aside from the line terminator, the Unicode horizontal space character (`U+0020`
 
 *   All other whitespace characters in string and character literals are represented by their corresponding escape sequence.
 *   Tab characters are not used for indentation.
+
+### Indentation
+
+A single level of indentation is **four** spaces.
 
 ### Special Escape Sequences
 
@@ -233,25 +238,25 @@ When deciding on the logical order of members, it can be helpful for readers and
 ```swift
 class MovieRatingViewController: UITableViewController {
 
-  // MARK: - View controller lifecycle methods
+    // MARK: - View controller lifecycle methods
 
-  override func viewDidLoad() {
-    /* ... */
-  }
+    override func viewDidLoad() {
+        /* ... */
+    }
 
-  override func viewWillAppear(_ animated: Bool) {
-    /* ... */
-  }
+    override func viewWillAppear(_ animated: Bool) {
+        /* ... */
+    }
 
-  // MARK: - Movie rating manipulation methods
+    // MARK: - Movie rating manipulation methods
 
-  @objc private func ratingStarWasTapped(_ sender: UIButton?) {
-    /* ... */
-  }
+    @objc private func ratingStarWasTapped(_ sender: UIButton?) {
+        /* ... */
+    }
 
-  @objc private func criticReviewWasTapped(_ sender: UIButton?) {
-    /* ... */
-  }
+    @objc private func criticReviewWasTapped(_ sender: UIButton?) {
+        /* ... */
+    }
 }
 ```
     
@@ -312,16 +317,16 @@ In other words, the only location where a semicolon may appear is inside a strin
 ✅
 ```swift
 func printSum(_ a: Int, _ b: Int) {
-  let sum = a + b
-  print(sum)
+    let sum = a + b
+    print(sum)
 }
 ```
 
 ❌
 ```swift
 func printSum(_ a: Int, _ b: Int) {
-  let sum = a + b;
-  print(sum);
+    let sum = a + b;
+    print(sum);
 }
 ```
 
@@ -344,8 +349,8 @@ case .third: return 20
 let squares = numbers.map { $0 * $0 }
 
 var someProperty: Int {
-  get { return otherObject.property }
-  set { otherObject.property = newValue }
+    get { return otherObject.property }
+    set { otherObject.property = newValue }
 }
 
 var someProperty: Int { return otherObject.somethingElse() }
@@ -366,7 +371,7 @@ As an example, consider the following complex function declaration, which needs 
 ❌
 ```swift
 public func index<Elements: Collection, Element>(of element: Element, in collection: Elements) -> Elements.Index? where Elements.Element == Element, Element: Equatable {
-  /* ... */
+    /* ... */
 }
 ```
     
@@ -384,37 +389,37 @@ Using these concepts, the cardinal rules of style for line-wrapping are:
 1. If the entire declaration, statement, or expression fits on one line, then do that.
 1. Comma-delimited lists are only laid out in one direction: horizontally or vertically. In other words, all elements must fit on the same line, or each element must be on its own line. A horizontally-oriented list does not contain any line breaks, even before the first element or after the last element. Except in control flow statements, a vertically-oriented list contains a line break before the first element and after each element.
 1. A continuation line starting with an unbreakable token sequence is indented at the same level as the original line.
-1. A continuation line that is part of a vertically-oriented comma-delimited list is indented exactly +2 from the original line.
-1. When an open curly brace (`{`) follows a line-wrapped declaration or expression, it is on the same line as the final continuation line unless that line is indented at +2 from the original line. In that case, the brace is placed on its own line, to avoid the continuation lines from blending visually with the body of the subsequent block.
+1. A continuation line that is part of a vertically-oriented comma-delimited list is indented exactly +4 from the original line.
+1. When an open curly brace (`{`) follows a line-wrapped declaration or expression, it is on the same line as the final continuation line unless that line is indented at +4 from the original line. In that case, the brace is placed on its own line, to avoid the continuation lines from blending visually with the body of the subsequent block.
     
 ✅
 ```swift
 public func index<Elements: Collection, Element>(
-  of element: Element,
-  in collection: Elements
+    of element: Element,
+    in collection: Elements
 ) -> Elements.Index?
 where
-  Elements.Element == Element,
-  Element: Equatable
+    Elements.Element == Element,
+    Element: Equatable
 {  // GOOD.
-  for current in elements {
-    /* ... */
-  }
+    for current in elements {
+        /* ... */
+    }
 }   
 ```
 
 ❌
 ```swift
 public func index<Elements: Collection, Element>(
-  of element: Element,
-  in collection: Elements
+    of element: Element,
+    in collection: Elements
 ) -> Elements.Index?
 where
-  Elements.Element == Element,
-  Element: Equatable {  // AVOID.
-  for current in elements {
-    /* ... */
-  }
+    Elements.Element == Element,
+    Element: Equatable {  // AVOID.
+    for current in elements {
+        /* ... */
+    }
 }
 ```
 
@@ -430,9 +435,9 @@ This line-wrapping style ensures that the different parts of a declaration are _
 ❌
 ```swift
 public func index<Elements: Collection, Element>(of element: Element,  // AVOID.
-                                                  in collection: Elements) -> Elements.Index?
+                                                 in collection: Elements) -> Elements.Index?
     where Elements.Element == Element, Element: Equatable {
-  doSomething()
+    doSomething()
 }
 ```
 
@@ -441,33 +446,33 @@ public func index<Elements: Collection, Element>(of element: Element,  // AVOID.
 ✅
 ```swift
 public func index<Elements: Collection, Element>(
-  of element: Element,
-  in collection: Elements
+    of element: Element,
+    in collection: Elements
 ) -> Elements.Index? where Elements.Element == Element, Element: Equatable {
-  for current in elements {
-    /* ... */
-  }
+    for current in elements {
+        /* ... */
+    }
 }
 ```
     
-Function declarations in protocols that are terminated with a closing parenthesis (`)`) may place the parenthesis on the same line as the final argument **or** on its own line.
+Function declarations in protocols that are terminated with a closing parenthesis (`)`) place that parenthesis on its own line.
 
-✅
+❌
 ```swift
 public protocol ContrivedExampleDelegate {
-  func contrivedExample(
-    _ contrivedExample: ContrivedExample,
-    willDoSomethingTo someValue: SomeValue)
+    func contrivedExample(
+        _ contrivedExample: ContrivedExample,
+        willDoSomethingTo someValue: SomeValue)
 }
 ```
 
 ✅
 ```swift
 public protocol ContrivedExampleDelegate {
-  func contrivedExample(
-    _ contrivedExample: ContrivedExample,
-    willDoSomethingTo someValue: SomeValue
-  )
+    func contrivedExample(
+        _ contrivedExample: ContrivedExample,
+        willDoSomethingTo someValue: SomeValue
+    )
 }
 ```
 
@@ -476,14 +481,14 @@ If types are complex and/or deeply nested, individual elements in the arguments/
 ✅
 ```swift
 public func performanceTrackingIndex<Elements: Collection, Element>(
-  of element: Element,
-  in collection: Elements
+    of element: Element,
+    in collection: Elements
 ) -> (
-  Element.Index?,
-  PerformanceTrackingIndexStatistics.Timings,
-  PerformanceTrackingIndexStatistics.SpaceUsed
+    Element.Index?,
+    PerformanceTrackingIndexStatistics.Timings,
+    PerformanceTrackingIndexStatistics.SpaceUsed
 ) {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -496,61 +501,64 @@ The examples below apply equally to `class`, `struct`, `enum`, `extension`, and 
 ✅
 ```swift
 class MyClass:
-  MySuperclass,
-  MyProtocol,
-  SomeoneElsesProtocol,
-  SomeFrameworkProtocol
+    MySuperclass,
+    MyProtocol,
+    SomeoneElsesProtocol,
+    SomeFrameworkProtocol
 {
-  /* ... */
+    /* ... */
 }
 
 class MyContainer<Element>:
-  MyContainerSuperclass,
-  MyContainerProtocol,
-  SomeoneElsesContainerProtocol,
-  SomeFrameworkContainerProtocol
+    MyContainerSuperclass,
+    MyContainerProtocol,
+    SomeoneElsesContainerProtocol,
+    SomeFrameworkContainerProtocol
 {
-  /* ... */
+    /* ... */
 }
 
 class MyContainer<BaseCollection>:
-  MyContainerSuperclass,
-  MyContainerProtocol,
-  SomeoneElsesContainerProtocol,
-  SomeFrameworkContainerProtocol
+    MyContainerSuperclass,
+    MyContainerProtocol,
+    SomeoneElsesContainerProtocol,
+    SomeFrameworkContainerProtocol
 where BaseCollection: Collection {
-  /* ... */
+    /* ... */
 }
 
 class MyContainer<BaseCollection>:
-  MyContainerSuperclass,
-  MyContainerProtocol,
-  SomeoneElsesContainerProtocol,
-  SomeFrameworkContainerProtocol
+    MyContainerSuperclass,
+    MyContainerProtocol,
+    SomeoneElsesContainerProtocol,
+    SomeFrameworkContainerProtocol
 where
-  BaseCollection: Collection,
-  BaseCollection.Element: Equatable,
-  BaseCollection.Element: SomeOtherProtocolOnlyUsedToForceLineWrapping
+    BaseCollection: Collection,
+    BaseCollection.Element: Equatable,
+    BaseCollection.Element: SomeOtherProtocolOnlyUsedToForceLineWrapping
 {
-  /* ... */
+    /* ... */
 }
 ```
 
 #### Function Calls
 
-When a function call is line-wrapped, each argument is written on its own line, indented +2 from the original line.
+When a function call is line-wrapped, each argument is written on its own line, indented +4 from the original line.
 
-As with function declarations, if the function call terminates its enclosing statement and ends with a closing parenthesis (`)`) (that is, it has no trailing closure), then the parenthesis may be placed **either** on the same line as the final argument **or** on its own line.
+As with function declarations, if the function call terminates its enclosing statement and ends with a closing parenthesis (`)`) (that is, it has no trailing closure), then the parenthesis is placed on its own line.
+
+❌
+```swift
+let index = index(
+    of: veryLongElementVariableName,
+    in: aCollectionOfElementsThatAlsoHappensToHaveALongName)
+```
 
 ✅
 ```swift
 let index = index(
-  of: veryLongElementVariableName,
-  in: aCollectionOfElementsThatAlsoHappensToHaveALongName)
-
-let index = index(
-  of: veryLongElementVariableName,
-  in: aCollectionOfElementsThatAlsoHappensToHaveALongName
+    of: veryLongElementVariableName,
+    in: aCollectionOfElementsThatAlsoHappensToHaveALongName
 )
 ```
 
@@ -559,79 +567,79 @@ If the function call ends with a trailing closure and the closure’s signature 
 ✅
 ```swift
 someAsynchronousAction.execute(withDelay: howManySeconds, context: actionContext) {
-  (context, completion) in
-  doSomething(withContext: context)
-  completion()
+    (context, completion) in
+    doSomething(withContext: context)
+    completion()
 }
 ```
 
 #### Control Flow Statements
 
-When a control flow statement (such as `if`, `guard`, `while`, or `for`) is wrapped, the first continuation line is indented to the same position as the token following the control flow keyword. Additional continuation lines are indented at that same position if they are syntactically parallel elements, or in +2 increments from that position if they are syntactically nested.
+When a control flow statement (such as `if`, `guard`, `while`, or `for`) is wrapped, the first continuation line is indented to the same position as the token following the control flow keyword. Additional continuation lines are indented at that same position if they are syntactically parallel elements, or in +4 increments from that position if they are syntactically nested.
 
 The open brace (`{`) preceding the body of the control flow statement can either be placed on the same line as the last continuation line or on the next line, at the same indentation level as the beginning of the statement. For `guard` statements, the `else {` must be kept together, either on the same line or on the next line.
 
 ✅
 ```swift
 if aBooleanValueReturnedByAVeryLongOptionalThing() &&
-    aDifferentBooleanValueReturnedByAVeryLongOptionalThing() &&
-    yetAnotherBooleanValueThatContributesToTheWrapping() {
-  doSomething()
+        aDifferentBooleanValueReturnedByAVeryLongOptionalThing() &&
+        yetAnotherBooleanValueThatContributesToTheWrapping() {
+    doSomething()
 }
 
 if aBooleanValueReturnedByAVeryLongOptionalThing() &&
-    aDifferentBooleanValueReturnedByAVeryLongOptionalThing() &&
-    yetAnotherBooleanValueThatContributesToTheWrapping()
+        aDifferentBooleanValueReturnedByAVeryLongOptionalThing() &&
+        yetAnotherBooleanValueThatContributesToTheWrapping()
 {
-  doSomething()
+    doSomething()
 }
 
 if let value = aValueReturnedByAVeryLongOptionalThing(),
-    let value2 = aDifferentValueReturnedByAVeryLongOptionalThing() {
-  doSomething()
+        let value2 = aDifferentValueReturnedByAVeryLongOptionalThing() {
+    doSomething()
 }
 
 if let value = aValueReturnedByAVeryLongOptionalThing(),
-    let value2 = aDifferentValueReturnedByAVeryLongOptionalThingThatForcesTheBraceToBeWrapped()
+        let value2 = aDifferentValueReturnedByAVeryLongOptionalThingThatForcesTheBraceToBeWrapped()
 {
-  doSomething()
+    doSomething()
 }
 
 guard let value = aValueReturnedByAVeryLongOptionalThing(),
       let value2 = aDifferentValueReturnedByAVeryLongOptionalThing() else {
-  doSomething()
+    doSomething()
 }
 
 guard let value = aValueReturnedByAVeryLongOptionalThing(),
       let value2 = aDifferentValueReturnedByAVeryLongOptionalThing()
 else {
-  doSomething()
+    doSomething()
 }
 
 for element in collection
     where element.happensToHaveAVeryLongPropertyNameThatYouNeedToCheck {
-  doSomething()
+    doSomething()
 }
 ```
 
 #### Other Expressions
 
-When line-wrapping other expressions that are not function calls (as described above), the second line (the one immediately following the first break) is indented exactly +2 from the original line.
+When line-wrapping other expressions that are not function calls (as described above), the second line (the one immediately following the first break) is indented exactly +4 from the original line.
 
-When there are multiple continuation lines, indentation may be varied in increments of +2 as needed. In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements. However, if there are many continuation lines caused by long wrapped expressions, consider splitting them into multiple statements using temporary variables when possible.
+When there are multiple continuation lines, indentation may be varied in increments of +4 as needed. In general, two continuation lines use the same indentation level if and only if they begin with syntactically parallel elements. However, if there are many continuation lines caused by long wrapped expressions, consider splitting them into multiple statements using temporary variables when possible.
 
 ✅
 ```swift
 let result = anExpression + thatIsMadeUpOf * aLargeNumber +
-  ofTerms / andTherefore % mustBeWrapped + (
-    andWeWill - keepMakingItLonger * soThatWeHave / aContrivedExample)
+    ofTerms / andTherefore % mustBeWrapped + (
+        andWeWill - keepMakingItLonger * soThatWeHave / aContrivedExample)
 ```
 
 ❌
 ```swift
 let result = anExpression + thatIsMadeUpOf * aLargeNumber +
-    ofTerms / andTherefore % mustBeWrapped + (
-        andWeWill - keepMakingItLonger * soThatWeHave / aContrivedExample)
+        ofTerms / andTherefore % mustBeWrapped + (
+                andWeWill - keepMakingItLonger * soThatWeHave / aContrivedExample)
 ```
 
 ### Horizontal Whitespace
@@ -645,14 +653,14 @@ Beyond where required by the language or other style rules, and apart from liter
 ✅
 ```swift 
 if (x == 0 && y == 0) || z == 0 {
-  /* ... */
+    /* ... */
 }
 ```
 
 ❌
 ```swift
 if(x == 0 && y == 0) || z == 0 {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -678,7 +686,7 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     var x = 5
     
     func sum(_ numbers: [Int], initialValue: Int = 0) {
-      /* ... */
+        /* ... */
     }
     ```    
 
@@ -687,7 +695,7 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     var x=5
     
     func sum(_ numbers: [Int], initialValue: Int=0) {
-      /* ... */
+        /* ... */
     }
     ```
 
@@ -696,30 +704,30 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     ✅
     ```swift
     func sayHappyBirthday(to person: NameProviding & AgeProviding) {
-      /* ... */
+        /* ... */
     }
     ```
 
     ❌
     ```swift
     func sayHappyBirthday(to person: NameProviding&AgeProviding) {
-      /* ... */
+        /* ... */
     }
     ```            
             
-    * The operator symbol in a function declaring/implementing that operator.
+    * **Exception:** There is no space between the operator symbol and the parameter list when declaring/implementing an operator. (This is a deliberate deviation from the upstream Google style, which calls for a space.)
 
     ✅
     ```swift
-    static func == (lhs: MyType, rhs: MyType) -> Bool {
-      /* ... */
+    static func ==(lhs: MyType, rhs: MyType) -> Bool {
+        /* ... */
     }
     ```
 
     ❌
     ```swift
-    static func ==(lhs: MyType, rhs: MyType) -> Bool {
-      /* ... */
+    static func == (lhs: MyType, rhs: MyType) -> Bool {
+        /* ... */
     }
     ```
       
@@ -728,14 +736,14 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     ✅
     ```swift
     func sum(_ numbers: [Int]) -> Int {
-      /* ... */
+        /* ... */
     }
     ```
 
     ❌
     ```swift
     func sum(_ numbers: [Int])->Int {
-      /* ... */
+        /* ... */
     }
     ```
             
@@ -756,7 +764,7 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     ✅
     ```swift
     for number in 1...5 {
-      /* ... */
+        /* ... */
     }
     
     let substring = string[index..<string.endIndex]
@@ -765,7 +773,7 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
     ❌
     ```swift 
     for number in 1 ... 5 {
-      /* ... */
+        /* ... */
     }
     
     let substring = string[index ..< string.endIndex]     
@@ -792,22 +800,22 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
         ✅
         ```swift
         struct HashTable: Collection {
-          /* ... */
+            /* ... */
         }
         
         struct AnyEquatable<Wrapped: Equatable>: Equatable {
-          /* ... */
+            /* ... */
         }
         ```
             
         ❌
         ```swift 
         struct HashTable : Collection {
-          /* ... */
+            /* ... */
         }
         
         struct AnyEquatable<Wrapped : Equatable> : Equatable {
-          /* ... */
+            /* ... */
         }
         ```
 
@@ -818,7 +826,7 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
         let tuple: (x: Int, y: Int)
         
         func sum(_ numbers: [Int]) {
-          /* ... */
+            /* ... */
         }
         ```
               
@@ -828,11 +836,11 @@ let nonNegativeCubes = numbers.map{$0 * $0 * $0}.filter{$0 >= 0}
         let tuple: (x : Int, y : Int)
         
         func sum(_ numbers:[Int]) {
-          /* ... */
+            /* ... */
         }
         
         func sum(_ numbers : [Int]) {
-          /* ... */
+            /* ... */
         }
         ```
             
@@ -907,16 +915,16 @@ Horizontal alignment is forbidden except when writing obviously tabular data whe
 ✅
 ```swift
 struct DataPoint {
-  var value: Int
-  var primaryColor: UIColor
+    var value: Int
+    var primaryColor: UIColor
 }
 ```
     
 ❌
 ```swift
 struct DataPoint {
-  var value:        Int
-  var primaryColor: UIColor
+    var value:        Int
+    var primaryColor: UIColor
 }
 ```
 
@@ -941,22 +949,22 @@ Parentheses are **not** used around the top-most expression that follows an `if`
 ✅
 ```swift
 if x == 0 {
-  print("x is zero")
+    print("x is zero")
 }
 
 if (x == 0 || y == 1) && z == 2 {
-  print("...")
+    print("...")
 }
 ```
 
 ❌
 ```swift
 if (x == 0) {
-  print("x is zero")
+    print("x is zero")
 }
 
 if ((x == 0 || y == 1) && z == 2) {
-  print("...")
+    print("...")
 }
 ```
     
@@ -996,23 +1004,23 @@ Case statements are indented at the _same_ level as the switch statement to whic
 ```swift
 switch order {
 case .ascending:
-  print("Ascending")
+    print("Ascending")
 case .descending:
-  print("Descending")
+    print("Descending")
 case .same:
-  print("Same")
+    print("Same")
 }
 ```
 
 ❌
 ```swift
 switch order {
-  case .ascending:
-    print("Ascending")
-  case .descending:
-    print("Descending")
-  case .same:
-    print("Same")
+    case .ascending:
+        print("Ascending")
+    case .descending:
+        print("Descending")
+    case .same:
+        print("Same")
 }
 ```
 
@@ -1035,26 +1043,26 @@ In general, there is only one `case` per line in an `enum`. The comma-delimited 
 ✅
 ```swift
 public enum Token {
-  case comma
-  case semicolon
-  case identifier
+    case comma
+    case semicolon
+    case identifier
 }
 
 public enum Token {
-  case comma, semicolon, identifier
+    case comma, semicolon, identifier
 }
 
 public enum Token {
-  case comma
-  case semicolon
-  case identifier(String)
+    case comma
+    case semicolon
+    case identifier(String)
 }
 ```
 
 ❌
 ```swift
 public enum Token {
-  case comma, semicolon, identifier(String)
+    case comma, semicolon, identifier(String)
 }
 ```
 
@@ -1063,16 +1071,16 @@ When all cases of an `enum` must be `indirect`, the `enum` itself is declared `i
 ✅
 ```swift
 public indirect enum DependencyGraphNode {
-  case userDefined(dependencies: [DependencyGraphNode])
-  case synthesized(dependencies: [DependencyGraphNode])
+    case userDefined(dependencies: [DependencyGraphNode])
+    case synthesized(dependencies: [DependencyGraphNode])
 }
 ```
 
 ❌
 ```swift
 public enum DependencyGraphNode {
-  indirect case userDefined(dependencies: [DependencyGraphNode])
-  indirect case synthesized(dependencies: [DependencyGraphNode])
+    indirect case userDefined(dependencies: [DependencyGraphNode])
+    indirect case synthesized(dependencies: [DependencyGraphNode])
 }
 ```
 
@@ -1081,16 +1089,16 @@ When an `enum` case does not have associated values, empty parentheses are never
 ✅
 ```swift
 public enum BinaryTree<Element> {
-  indirect case node(element: Element, left: BinaryTree, right: BinaryTree)
-  case empty  // GOOD.
+    indirect case node(element: Element, left: BinaryTree, right: BinaryTree)
+    case empty  // GOOD.
 }
 ```
 
 ❌
 ```swift
 public enum BinaryTree<Element> {
-  indirect case node(element: Element, left: BinaryTree, right: BinaryTree)
-  case empty()  // AVOID.
+    indirect case node(element: Element, left: BinaryTree, right: BinaryTree)
+    case empty()  // AVOID.
 }
 ```
 
@@ -1101,15 +1109,15 @@ In the following example, the cases are arranged in numerical order based on the
 ✅
 ```swift
 public enum HTTPStatus: Int {
-  case ok = 200
+    case ok = 200
 
-  case badRequest = 400
-  case notAuthorized = 401
-  case paymentRequired = 402
-  case forbidden = 403
-  case notFound = 404
+    case badRequest = 400
+    case notAuthorized = 401
+    case paymentRequired = 402
+    case forbidden = 403
+    case notFound = 404
 
-  case internalServerError = 500
+    case internalServerError = 500
 }
 ```
 
@@ -1118,13 +1126,13 @@ The following version of the same enum is less readable. Although the cases are 
 ❌
 ```swift
 public enum HTTPStatus: Int {
-  case badRequest = 400
-  case forbidden = 403
-  case internalServerError = 500
-  case notAuthorized = 401
-  case notFound = 404
-  case ok = 200
-  case paymentRequired = 402
+    case badRequest = 400
+    case forbidden = 403
+    case internalServerError = 500
+    case notAuthorized = 401
+    case notFound = 404
+    case ok = 200
+    case paymentRequired = 402
 }
 ```
 
@@ -1137,11 +1145,11 @@ Consider the following example, which prohibits using trailing closure syntax to
 ❌
 ```swift
 func greet(enthusiastically nameProvider: () -> String) {
-  print("Hello, \(nameProvider())! It's a pleasure to see you!")
+    print("Hello, \(nameProvider())! It's a pleasure to see you!")
 }
 
 func greet(apathetically nameProvider: () -> String) {
-  print("Oh, look. It's \(nameProvider()).")
+    print("Oh, look. It's \(nameProvider()).")
 }
 
 greet { "John" }  // error: ambiguous use of 'greet'
@@ -1152,11 +1160,11 @@ This example is fixed by differentiating some part of the function name other th
 ✅
 ```swift
 func greetEnthusiastically(_ nameProvider: () -> String) {
-  print("Hello, \(nameProvider())! It's a pleasure to see you!")
+    print("Hello, \(nameProvider())! It's a pleasure to see you!")
 }
 
 func greetApathetically(_ nameProvider: () -> String) {
-  print("Oh, look. It's \(nameProvider()).")
+    print("Oh, look. It's \(nameProvider()).")
 }
 
 greetEnthusiastically { "John" }
@@ -1168,24 +1176,25 @@ If a function call has multiple closure arguments, then _none_ are called using 
 ✅
 ```swift
 UIView.animate(
-  withDuration: 0.5,
-  animations: {
-    /* ... */
-  },
-  completion: { finished in
-    /* ... */
-  })
+    withDuration: 0.5,
+    animations: {
+        /* ... */
+    },
+    completion: { finished in
+        /* ... */
+    }
+)
 ```
 
 ❌
 ```swift
 UIView.animate(
-  withDuration: 0.5,
-  animations: {
-    /* ... */
-  }) { finished in
-    /* ... */
-  }
+    withDuration: 0.5,
+    animations: {
+        /* ... */
+    }) { finished in
+        /* ... */
+    }
 ```
 
 If a function has a single closure argument and it is the final argument, then it is _always_ called using trailing closure syntax, except in the following cases to resolve ambiguity or parsing errors:
@@ -1196,23 +1205,23 @@ If a function has a single closure argument and it is the final argument, then i
 ✅
 ```swift
 Timer.scheduledTimer(timeInterval: 30, repeats: false) { timer in
-  print("Timer done!")
+    print("Timer done!")
 }
 
 if let firstActive = list.first(where: { $0.isActive }) {
-  process(firstActive)
+    process(firstActive)
 }
 ```
 
 ❌
 ```swift
 Timer.scheduledTimer(timeInterval: 30, repeats: false, block: { timer in
-  print("Timer done!")
+    print("Timer done!")
 })
 
 // This example fails to compile.
 if let firstActive = list.first { $0.isActive } {
-  process(firstActive)
+    process(firstActive)
 }
 ```
 
@@ -1236,9 +1245,9 @@ Trailing commas in array and dictionary literals are _not required_ when each el
 ✅
 ```swift
 let configurationKeys = [
-  "bufferSize",
-  "compression",
-  "encoding"
+    "bufferSize",
+    "compression",
+    "encoding"
 ]
 ```
 
@@ -1258,14 +1267,14 @@ Parameterized attributes (such as `@availability(...)` or `@objc(...)`) are each
 ```swift
 @available(iOS 9.0, *)
 public func coolNewFeature() {
-  /* ... */
+    /* ... */
 }
 ```
 
 ❌
 ```swift
 @available(iOS 9.0, *) public func coolNewFeature() {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1274,7 +1283,7 @@ Attributes without parameters (for example, `@objc` without arguments, `@IBOutle
 ✅
 ```swift
 public class MyViewController: UIViewController {
-  @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
 }
 ```
 
@@ -1314,28 +1323,28 @@ For clarity, initializer arguments that correspond directly to a stored property
 ✅
 ```swift
 public struct Person {
-  public let name: String
-  public let phoneNumber: String
+    public let name: String
+    public let phoneNumber: String
 
-  // GOOD.
-  public init(name: String, phoneNumber: String) {
-    self.name = name
-    self.phoneNumber = phoneNumber
-  }
+    // GOOD.
+    public init(name: String, phoneNumber: String) {
+        self.name = name
+        self.phoneNumber = phoneNumber
+    }
 }
 ```
 
 ❌
 ```swift
 public struct Person {
-  public let name: String
-  public let phoneNumber: String
+    public let name: String
+    public let phoneNumber: String
 
-  // AVOID.
-  public init(name otherName: String, phoneNumber otherPhoneNumber: String) {
-    name = otherName
-    phoneNumber = otherPhoneNumber
-  }
+    // AVOID.
+    public init(name otherName: String, phoneNumber otherPhoneNumber: String) {
+        name = otherName
+        phoneNumber = otherPhoneNumber
+    }
 }
 ```
 
@@ -1346,30 +1355,30 @@ Static and class properties that return instances of the declaring type are _not
 ✅
 ```swift
 public class UIColor {
-  public class var red: UIColor {
-    /* ... */
-  }
+    public class var red: UIColor {
+        /* ... */
+    }
 }
 
 public class URLSession {
-  public class var shared: URLSession {
-    /* ... */
-  }
+    public class var shared: URLSession {
+        /* ... */
+    }
 }
 ```
     
 ❌
 ```swift
 public class UIColor {
-  public class var redColor: UIColor {
-    /* ... */
-  }
+    public class var redColor: UIColor {
+        /* ... */
+    }
 }
 
 public class URLSession {
-  public class var sharedSession: URLSession {
-    /* ... */
-  }
+    public class var sharedSession: URLSession {
+        /* ... */
+    }
 }
 ```
 
@@ -1430,9 +1439,10 @@ For methods that take **additional** arguments after the delegate’s source obj
     ✅
     ```swift
     func tableView(
-      _ tableView: UITableView,
-      willDisplayCell cell: UITableViewCell,
-      forRowAt indexPath: IndexPath)
+        _ tableView: UITableView,
+        willDisplayCell cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    )
     ```
     
 * If the method returns `Bool`, the second argument is **labeled with an indicative or conditional verb phrase** that describes the return value in terms of the argument, and any other arguments (if present) provide further context.
@@ -1440,9 +1450,9 @@ For methods that take **additional** arguments after the delegate’s source obj
     ✅
     ```swift
     func tableView(
-      _ tableView: UITableView,
-      shouldSpringLoadRowAt indexPath: IndexPath,
-      with context: UISpringLoadedInteractionContext
+        _ tableView: UITableView,
+        shouldSpringLoadRowAt indexPath: IndexPath,
+        with context: UISpringLoadedInteractionContext
     ) -> Bool
     ```
     
@@ -1451,8 +1461,8 @@ For methods that take **additional** arguments after the delegate’s source obj
     ✅
     ```swift
     func tableView(
-      _ tableView: UITableView,
-      heightForRowAt indexPath: IndexPath
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
     ) -> CGFloat
     ```
     
@@ -1478,9 +1488,9 @@ The initializers declared by the special `ExpressibleBy*Literal` compiler protoc
 ✅
 ```swift
 struct Kilometers: ExpressibleByIntegerLiteral {
-  init(integerLiteral value: Int) {
-    /* ... */
-  }
+    init(integerLiteral value: Int) {
+        /* ... */
+    }
 }
 
 let k1: Kilometers = 10                          // GOOD.
@@ -1490,9 +1500,9 @@ let k2 = 10 as Kilometers                        // ALSO GOOD.
 ❌
 ```swift
 struct Kilometers: ExpressibleByIntegerLiteral {
-  init(integerLiteral value: Int) {
-    /* ... */
-  }
+    init(integerLiteral value: Int) {
+        /* ... */
+    }
 }
 
 let k = Kilometers(integerLiteral: 10)           // AVOID.
@@ -1522,16 +1532,16 @@ The `get` block for a read-only computed property is omitted and its body is dir
 ✅
 ```swift
 var totalCost: Int {
-  return items.sum { $0.cost }
+    return items.sum { $0.cost }
 }
 ```
 
 ❌
 ```swift
 var totalCost: Int {
-  get {
-    return items.sum { $0.cost }
-  }
+    get {
+        return items.sum { $0.cost }
+    }
 }
 ```
 
@@ -1542,20 +1552,20 @@ Arrays, dictionaries, and optional types are written in their shorthand form whe
 ✅
 ```swift
 func enumeratedDictionary<Element>(
-  from values: [Element],
-  start: Array<Element>.Index? = nil
+    from values: [Element],
+    start: Array<Element>.Index? = nil
 ) -> [Int: Element] {
-  /* ... */
+    /* ... */
 }
 ```
 
 ❌
 ```swift
 func enumeratedDictionary<Element>(
-  from values: Array<Element>,
-  start: Optional<Array<Element>.Index> = nil
+    from values: Array<Element>,
+    start: Optional<Array<Element>.Index> = nil
 ) -> Dictionary<Int, Element> {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1566,7 +1576,7 @@ Empty argument lists are always written as `()`, never as `Void`. (In fact, the 
 ✅
 ```swift
 func doSomething() {
-  /* ... */
+    /* ... */
 }
 
 let callback: () -> Void
@@ -1575,11 +1585,11 @@ let callback: () -> Void
 ❌
 ```swift
 func doSomething() -> Void {
-  /* ... */
+    /* ... */
 }
 
 func doSomething2() -> () {
-  /* ... */
+    /* ... */
 }
 
 let callback: () -> ()
@@ -1594,27 +1604,27 @@ Sentinel values are avoided when designing algorithms (for example, an “index�
 ✅
 ```swift
 func index(of thing: Thing, in things: [Thing]) -> Int? {
-  /* ... */
+    /* ... */
 }
 
 if let index = index(of: thing, in: lotsOfThings) {
-  // Found it.
+    // Found it.
 } else {
-  // Didn't find it.
+    // Didn't find it.
 }
 ```
 
 ❌
 ```swift
 func index(of thing: Thing, in things: [Thing]) -> Int {
-  /* ... */
+    /* ... */
 }
 
 let index = index(of: thing, in: lotsOfThings)
 if index != -1 {
-  // Found it.
+    // Found it.
 } else {
-  // Didn't find it.
+    // Didn't find it.
 }
 ```
 
@@ -1625,9 +1635,9 @@ For example, converting a string to an integer would fail if the string does not
 ✅
 ```swift
 struct Int17 {
-  init?(_ string: String) {
-    /* ... */
-  }
+    init?(_ string: String) {
+        /* ... */
+    }
 }
 ```
 
@@ -1636,7 +1646,7 @@ Conditional statements that test that an `Optional` is non-`nil` but do not acce
 ✅
 ```swift
 if value != nil {
-  print("value was not nil")
+    print("value was not nil")
 }
 ```
 
@@ -1645,7 +1655,7 @@ This example, while taking advantage of Swift’s pattern matching and binding s
 ❌
 ```swift
 if let _ = value {
-  print("value was not nil")
+    print("value was not nil")
 }
 ```
 
@@ -1658,25 +1668,25 @@ Throwing errors instead of merging them with the return type cleanly separates c
 ✅
 ```swift
 struct Document {
-  enum ReadError: Error {
-    case notFound
-    case permissionDenied
-    case malformedHeader
-  }
+    enum ReadError: Error {
+        case notFound
+        case permissionDenied
+        case malformedHeader
+    }
 
-  init(path: String) throws {
-    /* ... */
-  }
+    init(path: String) throws {
+        /* ... */
+    }
 }
 
 do {
-  let document = try Document(path: "important.data")
+    let document = try Document(path: "important.data")
 } catch Document.ReadError.notFound {
-  /* ... */
+    /* ... */
 } catch Document.ReadError.permissionDenied {
-  /* ... */
+    /* ... */
 } catch {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1725,15 +1735,15 @@ User-interface objects whose lifetimes are based on the UI lifecycle instead of 
 ✅
 ```swift
 class SomeViewController: UIViewController {
-  @IBOutlet var button: UIButton!
+    @IBOutlet var button: UIButton!
 
-  override func viewDidLoad() {
-    populateLabel(for: button)
-  }
+    override func viewDidLoad() {
+        populateLabel(for: button)
+    }
 
-  private func populateLabel(for button: UIButton) {
-    /* ... */
-  }
+    private func populateLabel(for button: UIButton) {
+        /* ... */
+    }
 }
 ```
 
@@ -1750,26 +1760,26 @@ Specifying an explicit access level at the file level on an extension is forbidd
 ✅
 ```swift
 extension String {
-  public var isUppercase: Bool {
-    /* ... */
-  }
+    public var isUppercase: Bool {
+        /* ... */
+    }
 
-  public var isLowercase: Bool {
-    /* ... */
-  }
+    public var isLowercase: Bool {
+        /* ... */
+    }
 }
 ```
 
 ❌
 ```swift
 public extension String {
-  var isUppercase: Bool {
-    /* ... */
-  }
+    var isUppercase: Bool {
+        /* ... */
+    }
 
-  var isLowercase: Bool {
-    /* ... */
-  }
+    var isLowercase: Bool {
+        /* ... */
+    }
 }
 ```
 
@@ -1780,28 +1790,28 @@ Swift allows `enum`s, `struct`s, and `class`es to be nested, so nesting is prefe
 ✅
 ```swift
 class Parser {
-  enum Error: Swift.Error {
-    case invalidToken(String)
-    case unexpectedEOF
-  }
+    enum Error: Swift.Error {
+        case invalidToken(String)
+        case unexpectedEOF
+    }
 
-  func parse(text: String) throws {
-    /* ... */
-  }
+    func parse(text: String) throws {
+        /* ... */
+    }
 }
 ```
 
 ❌
 ```swift
 class Parser {
-  func parse(text: String) throws {
-    /* ... */
-  }
+    func parse(text: String) throws {
+        /* ... */
+    }
 }
 
 enum ParseError: Error {
-  case invalidToken(String)
-  case unexpectedEOF
+    case invalidToken(String)
+    case unexpectedEOF
 }
 ```
 
@@ -1812,20 +1822,20 @@ Declaring an `enum` without cases is the canonical way to define a “namespace�
 ✅
 ```swift
 enum Dimensions {
-  static let tileMargin: CGFloat = 8
-  static let tilePadding: CGFloat = 4
-  static let tileContentSize: CGSize(width: 80, height: 64)
+    static let tileMargin: CGFloat = 8
+    static let tilePadding: CGFloat = 4
+    static let tileContentSize: CGSize(width: 80, height: 64)
 }
 ```
 
 ❌
 ```swift
 struct Dimensions {
-  private init() {}
+    private init() {}
 
-  static let tileMargin: CGFloat = 8
-  static let tilePadding: CGFloat = 4
-  static let tileContentSize: CGSize(width: 80, height: 64)
+    static let tileMargin: CGFloat = 8
+    static let tilePadding: CGFloat = 4
+    static let tileContentSize: CGSize(width: 80, height: 64)
 }
 ```
 
@@ -1840,37 +1850,37 @@ This can be seen in the following examples; in the first, there is a clear progr
 ✅
 ```swift
 func discombobulate(_ values: [Int]) throws -> Int {
-  guard let first = values.first else {
-    throw DiscombobulationError.arrayWasEmpty
-  }
-  guard first >= 0 else {
-    throw DiscombobulationError.negativeEnergy
-  }
+    guard let first = values.first else {
+        throw DiscombobulationError.arrayWasEmpty
+    }
+    guard first >= 0 else {
+        throw DiscombobulationError.negativeEnergy
+    }
 
-  var result = 0
-  for value in values {
-    result += invertedCombobulatoryFactory(of: value)
-  }
-  return result
+    var result = 0
+    for value in values {
+        result += invertedCombobulatoryFactory(of: value)
+    }
+    return result
 }
 ```
 
 ❌
 ```swift
 func discombobulate(_ values: [Int]) throws -> Int {
-  if let first = values.first {
-    if first >= 0 {
-      var result = 0
-      for value in values {
-        result += invertedCombobulatoryFactor(of: value)
-      }
-      return result
+    if let first = values.first {
+        if first >= 0 {
+            var result = 0
+            for value in values {
+                result += invertedCombobulatoryFactor(of: value)
+            }
+            return result
+        } else {
+            throw DiscombobulationError.negativeEnergy
+        }
     } else {
-      throw DiscombobulationError.negativeEnergy
+        throw DiscombobulationError.arrayWasEmpty
     }
-  } else {
-    throw DiscombobulationError.arrayWasEmpty
-  }
 }
 ``` 
 
@@ -1883,16 +1893,16 @@ When the entirety of a `for` loop’s body would be a single `if` block testing 
 ✅
 ```swift
 for item in collection where item.hasProperty {
-  /* ... */
+    /* ... */
 }
 ```
 
 ❌
 ```swift
 for item in collection {
-  if item.hasProperty {
-    /* ... */
-  }
+    if item.hasProperty {
+        /* ... */
+    }
 }
 ```
     
@@ -1932,8 +1942,8 @@ The `let` and `var` keywords are placed individually in front of _each_ element 
 ✅
 ```swift
 enum DataPoint {
-  case unlabeled(Int)
-  case labeled(String, Int)
+    case unlabeled(Int)
+    case labeled(String, Int)
 }
 
 let label = "goodbye"
@@ -1942,7 +1952,7 @@ let label = "goodbye"
 // the pattern below matches only data points that have the label "goodbye".
 switch DataPoint.labeled("hello", 100) {
 case .labeled(label, let value):
-  /* ... */
+    /* ... */
 }
 
 // Writing `let` before each individual binding clarifies that the intent is to
@@ -1951,7 +1961,7 @@ case .labeled(label, let value):
 // matches data points with any string label.
 switch DataPoint.labeled("hello", 100) {
 case .labeled(let label, let value):
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1961,7 +1971,7 @@ In the example below, if the author’s intention was to match using the value o
 ```swift
 switch DataPoint.labeled("hello", 100) {
 case let .labeled(label, value):
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1970,15 +1980,15 @@ Labels of tuple arguments and `enum` associated values are omitted when binding 
 ✅
 ```swift
 enum BinaryTree<Element> {
-  indirect case subtree(left: BinaryTree<Element>, right: BinaryTree<Element>)
-  case leaf(element: Element)
+    indirect case subtree(left: BinaryTree<Element>, right: BinaryTree<Element>)
+    case leaf(element: Element)
 }
 
 switch treeNode {
 case .subtree(let left, let right):
-  /* ... */
+    /* ... */
 case .leaf(let element):
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -1988,9 +1998,9 @@ Including the labels adds noise that is redundant and lacking useful information
 ```swift
 switch treeNode {
 case .subtree(left: let left, right: let right):
-  /* ... */
+    /* ... */
 case .leaf(element: let element):
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2045,7 +2055,7 @@ let y4: UnicodeScalar = "a"
 let y5 = "a" as UnicodeScalar
 
 func writeByte(_ byte: UInt8) {
-  /* ... */
+    /* ... */
 }
 // Inference also occurs for function arguments, so 50 is a UInt8 without
 // explicitly coercion.
@@ -2120,18 +2130,18 @@ Masking operations are comparatively rare but are permitted (and in fact necessa
 ✅
 ```swift
 var hashValue: Int {
-  // GOOD. What matters here is the distribution of the bit pattern rather than
-  // the actual numeric value.
-  return foo.hashValue &+ 31 * (bar.hashValue &+ 31 &* baz.hashValue)
+    // GOOD. What matters here is the distribution of the bit pattern rather than
+    // the actual numeric value.
+    return foo.hashValue &+ 31 * (bar.hashValue &+ 31 &* baz.hashValue)
 }
 ```
 
 ❌
 ```swift
 var hashValue: Int {
-  // INCORRECT. This will trap arbitrarily and unpredictably depending on the
-  // hash values of the individual terms.
-  return foo.hashValue + 31 * (bar.hashValue + 31 * baz.hashValue)
+    // INCORRECT. This will trap arbitrarily and unpredictably depending on the
+    // hash values of the individual terms.
+    return foo.hashValue + 31 * (bar.hashValue + 31 * baz.hashValue)
 }
 ```
 
@@ -2171,34 +2181,34 @@ Documentation comments are written using the format where each line is preceded 
 ///
 /// - Returns: The numeric value of the scalar.
 func numericValue(of digit: UnicodeScalar, radix: Int = 10) -> Int {
-  /* ... */
+    /* ... */
 }
 ```
 
 ❌
 ```swift
 /**
-  * Returns the numeric value of the given digit represented as a Unicode scalar.
-  *
-  * - Parameters:
-  *   - digit: The Unicode scalar whose numeric value should be returned.
-  *   - radix: The radix, between 2 and 36, used to compute the numeric value.
-  * - Returns: The numeric value of the scalar.
-  */
+    * Returns the numeric value of the given digit represented as a Unicode scalar.
+    *
+    * - Parameters:
+    *   - digit: The Unicode scalar whose numeric value should be returned.
+    *   - radix: The radix, between 2 and 36, used to compute the numeric value.
+    * - Returns: The numeric value of the scalar.
+    */
 func numericValue(of digit: UnicodeScalar, radix: Int = 10) -> Int {
-  /* ... */
+    /* ... */
 }
 
 /**
 Returns the numeric value of the given digit represented as a Unicode scalar.
 
 - Parameters:
-  - digit: The Unicode scalar whose numeric value should be returned.
-  - radix: The radix, between 2 and 36, used to compute the numeric value.
+    - digit: The Unicode scalar whose numeric value should be returned.
+    - radix: The radix, between 2 and 36, used to compute the numeric value.
 - Returns: The numeric value of the scalar.
 */
 func numericValue(of digit: UnicodeScalar, radix: Int = 10) -> Int {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2220,7 +2230,7 @@ var backgroundColor: UIColor
 /// - Parameter numbers: The numbers to sum.
 /// - Returns: The sum of the numbers.
 func sum(_ numbers: [Int]) -> Int {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2234,7 +2244,7 @@ var backgroundColor: UIColor
 /// - Parameter numbers: The numbers to sum.
 /// - Returns: The sum of the numbers.
 func sum(_ numbers: [Int]) -> Int {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2258,7 +2268,7 @@ When a method takes a single argument, the singular inline form of the `Paramete
 /// - Returns: A string containing the contents of the invoked process's
 ///   standard output.
 func execute(command: String) -> String {
-  /* ... */
+    /* ... */
 }
 
 /// Returns the output generated by executing a command with the given string
@@ -2270,7 +2280,7 @@ func execute(command: String) -> String {
 /// - Returns: A string containing the contents of the invoked process's
 ///   standard output.
 func execute(command: String, stdin: String) -> String {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2285,7 +2295,7 @@ The following examples are incorrect, because they use the plural form of `Param
 /// - Returns: A string containing the contents of the invoked process's
 ///   standard output.
 func execute(command: String) -> String {
-  /* ... */
+    /* ... */
 }
 
 /// Returns the output generated by executing a command with the given string
@@ -2296,7 +2306,7 @@ func execute(command: String) -> String {
 /// - Returns: A string containing the contents of the invoked process's
 ///   standard output.
 func execute(command: String, stdin: String) -> String {
-  /* ... */
+    /* ... */
 }
 ```
 
@@ -2330,7 +2340,7 @@ At a minimum, documentation comments are present for every open or public declar
     ```swift
     /// Add `Equatable` conformance.
     extension MyType: Equatable {
-      /* ... */
+        /* ... */
     }
     ``` 
     
@@ -2340,7 +2350,7 @@ At a minimum, documentation comments are present for every open or public declar
     ```swift
     /// Make `Candidate` comparable so that they can be sorted.
     extension Candidate: Comparable {
-      /* ... */
+        /* ... */
     }
     ```
         
