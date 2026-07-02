@@ -8,11 +8,11 @@ extension Geoflash {
     ) -> Geoflash.Range {
         
         let mean = (range.min + range.max) / 2
-        
+
         return char == "1"
-        ? Geoflash.Range(min: mean, max: range.max)!
-        : Geoflash.Range(min: range.min, max: mean)!
-        
+        ? (Geoflash.Range(min: mean, max: range.max) ?? range)
+        : (Geoflash.Range(min: range.min, max: mean) ?? range)
+
     }
         
     static func validated(hash: String) throws -> String {
@@ -23,6 +23,7 @@ extension Geoflash {
         
         guard
             !bits.isEmpty,
+            validPrecisions.contains(hash.count),
             bits.count == hash.count * padSize,
             bits.count.isMultiple(of: padSize)
         else { throw CodingError.invalidGeohash }

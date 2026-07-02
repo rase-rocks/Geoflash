@@ -32,6 +32,30 @@ final class GeoflashDecodeTests: XCTestCase {
         
     }
 
+    func testLongButValidHashThrows() {
+
+        // A hash composed entirely of valid alphabet characters but far longer than the
+        // maximum precision must be rejected rather than subdividing until the range
+        // collapses below Double precision (which previously trapped on a force unwrap).
+        let longValidHash = String(repeating: "b", count: 200)
+
+        XCTAssertThrowsError(try Geoflash.decode(geohash: longValidHash))
+        XCTAssertThrowsError(try Geoflash.decode(rangeOf: longValidHash))
+
+    }
+
+    func testBoundaryLengths() throws {
+
+        let validHash = "u4pruydqqvjk"
+        XCTAssertEqual(validHash.count, 12)
+        XCTAssertNoThrow(try Geoflash.decode(geohash: validHash))
+
+        let tooLongHash = validHash + "0"
+        XCTAssertEqual(tooLongHash.count, 13)
+        XCTAssertThrowsError(try Geoflash.decode(geohash: tooLongHash))
+
+    }
+
     func testKnownValueRangeOf() throws {
         
         // Test hash taken from 

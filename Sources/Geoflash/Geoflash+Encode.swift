@@ -2,8 +2,8 @@ import Foundation
 
 extension Geoflash {
     
-    static let lat = Geoflash.Range(min: -90.0, max: 90.0)!
-    static let lng = Geoflash.Range(min: -180.0, max: 180.0)!
+    static let lat = Geoflash.Range(unchecked: -90.0, max: 90.0)
+    static let lng = Geoflash.Range(unchecked: -180.0, max: 180.0)
     static let validPrecisions = 1...12
     
     /// Encode latitude/longitude as [Geohash](https://en.wikipedia.org/wiki/Geohash)
@@ -57,8 +57,8 @@ extension Geoflash {
                 
             }
             
-            return Range(min: min, max: max)!
-            
+            return Range(unchecked: min, max: max)
+
         }
 
         repeat {

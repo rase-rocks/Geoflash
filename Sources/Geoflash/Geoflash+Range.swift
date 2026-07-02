@@ -23,9 +23,21 @@ extension Geoflash {
             
             self.min = min
             self.max = max
-            
+
         }
-        
+
+        /// Initialise a ``Geoflash/Range`` from bounds already known to be ordered.
+        ///
+        /// This trusted initialiser skips the `min < max` validation performed by
+        /// ``init(min:max:)`` and is reserved for internal callers that construct ranges
+        /// from compile time constants or from a subdivision that cannot invert.
+        init(unchecked min: Double, max: Double) {
+
+            self.min = min
+            self.max = max
+
+        }
+
         /// Determine if the passed `value` argument is contained with this instance
         ///
         /// - Parameter value: The value to be checked.
