@@ -22,5 +22,7 @@ import Foundation
 /// The above explanation is taken directly from
 /// [Wikipedia](https://en.wikipedia.org/wiki/Geohash)
 ///
-/// The ``Geoflash`` type exists to namespace encoding and decoding functionality
-public struct Geoflash { }
+/// The ``Geoflash`` type exists to namespace encoding and decoding functionality.
+///
+/// It is a caseless `enum` so that it cannot be instantiated.
+public enum Geoflash {}

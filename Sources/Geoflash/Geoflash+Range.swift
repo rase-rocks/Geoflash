@@ -2,13 +2,13 @@ import Foundation
 
 extension Geoflash {
     
-    /// A range for the purposes of expressing min/max values
+    /// A range for the purposes of expressing min/max values.
     public struct Range {
-        
-        /// The minimum possible value
+
+        /// The minimum possible value.
         public let min: Double
 
-        /// The maximum possible value
+        /// The maximum possible value.
         public let max: Double
         
         /// Initialise a ``Geoflash/Range`` with min/max values.
@@ -42,7 +42,7 @@ extension Geoflash {
 
         }
 
-        /// Determine if the passed `value` argument is contained with this instance
+        /// Determine if the passed `value` argument is contained within this instance.
         ///
         /// - Parameter value: The value to be checked.
         ///

@@ -4,7 +4,7 @@ extension CharacterSet {
     
     /// Documentation at
     /// https://developer.apple.com/documentation/foundation/nscharacterset/1417719-bitmaprepresentation
-    var codePoints : [Int] {
+    var codePoints: [Int] {
         
         var result: [Int] = []
         var plane = 0

@@ -4,11 +4,11 @@ extension Geoflash {
 
     /// Narrows a range towards one half based on a single decoded bit.
     ///
-    /// - Parameter range: The range to subdivide.
-    /// - Parameter bit: When `true` the upper half is selected, otherwise the lower half.
-    ///
+    /// - Parameters:
+    ///   - range: The range to subdivide.
+    ///   - bit: When `true` the upper half is selected, otherwise the lower half.
     /// - Returns: The selected half, or the unchanged `range` if it can no longer be
-    /// subdivided within `Double` precision.
+    ///   subdivided within `Double` precision.
     static func decodeReducer(
         range: Geoflash.Range,
         bit: Bool
@@ -74,15 +74,14 @@ extension Geoflash {
     /// // [[-71.65901184082031, -35.43046312406659]]
     /// ```
     ///
-    /// - Parameter geohash: The `String` value to attempt to decode.
-    /// - Parameter maxPointDistance: The largest span, in degrees, that a decoded range may
-    /// cover before a bounding polygon is returned instead of a single point. Defaults to
-    /// `0.000001`, which yields a single point for 12 character hashes and a polygon otherwise.
-    ///
+    /// - Parameters:
+    ///   - geohash: The `String` value to attempt to decode.
+    ///   - maxPointDistance: The largest span, in degrees, that a decoded range may cover
+    ///     before a bounding polygon is returned instead of a single point. Defaults to
+    ///     `0.000001`, which yields a single point for 12 character hashes and a polygon otherwise.
     /// - Returns: An array of [GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946)
-    /// encoded `[longitude, latitude]` coordinates. A single point when the decoded range is
-    /// within `maxPointDistance`, otherwise the four corners of the bounding polygon.
-    ///
+    ///   encoded `[longitude, latitude]` coordinates. A single point when the decoded range is
+    ///   within `maxPointDistance`, otherwise the four corners of the bounding polygon.
     /// - Throws: ``Geoflash/CodingError/invalidGeohash`` when passed an invalid geohash.
     public static func decode(
         geohash: String,

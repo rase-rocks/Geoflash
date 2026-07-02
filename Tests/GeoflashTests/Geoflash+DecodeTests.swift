@@ -63,7 +63,7 @@ final class GeoflashDecodeTests: XCTestCase {
 
         let knownHash = "u4pruydqqvj"
         
-        let (latitude: lat, longitude: lon) = try Geoflash.decode(rangeOf: knownHash)
+        let (lat, lon) = try Geoflash.decode(rangeOf: knownHash)
 
         XCTAssertEqual(lat.min, 57.649109959602356)
         XCTAssertEqual(lat.max, 57.649111300706863)

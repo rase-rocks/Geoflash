@@ -16,14 +16,13 @@ extension Geoflash {
     /// // dqcjr
     /// ```
     ///
-    /// - Parameter latitude: The latitude to be encoded (-90...90 valid values).
-    /// - Parameter longitude: The longitude to be encoded (-180...180 valid values).
-    /// - Parameter precision: The count of characters to be included in the result (1...12 valid).
-    ///
+    /// - Parameters:
+    ///   - latitude: The latitude to be encoded (-90...90 valid values).
+    ///   - longitude: The longitude to be encoded (-180...180 valid values).
+    ///   - precision: The count of characters to be included in the result (1...12 valid).
     /// - Returns: The Geohash encoded string.
-    ///
     /// - Throws: ``Geoflash/CodingError/invalidEncodeArguments`` when the latitude, longitude
-    /// or precision falls outside its valid range.
+    ///   or precision falls outside its valid range.
     public static func encode(
         latitude: Double,
         longitude: Double,
@@ -39,7 +38,7 @@ extension Geoflash {
             validPrecisions.contains(precision)
         else { throw CodingError.invalidEncodeArguments }
         
-        var hash = Array(repeating: Character("a"),
+        var hash = Array(repeating: "a" as Character,
                          count: precision)
         
         var isEven = true
